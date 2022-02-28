@@ -40,7 +40,7 @@ on:
 
 jobs:
   TestAmplification:
-    uses: TestAmplification/SmallAmpCI/blob/main/.github/workflows/SmallAmpCI.yml@main
+    uses: TestAmplification/SmallAmpCI/.github/workflows/SmallAmpCI.yml@main
     with:
       testClasses: ${{inputs.testClasses }}
       mode: ${{inputs.mode}}
