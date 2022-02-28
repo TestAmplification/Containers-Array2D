@@ -290,6 +290,29 @@ CTArray2DTest >> testFromArray [
 	
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testFromArray_amp_U0 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testFromArray` by applying some transformations and regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D class>> #fromArray:width:` from 40 to 192:
+		Operation: ReplaceIfFalseReceiverWithTrueOperator
+		Code snippet: `(aCollection size \\ aSize) isZero ifFalse: [ 
+	^ self error:
+		  'There is a mismatch between the collection size and the supposed sized to the 2D array' ]`
+		Dynamic state: {#aCollection->#(0 2 4 6 8 10). #aSize->3}
+		Mutant id: ReplaceIfFalseReceiverWithTrueOperator#CTArray2D class#fromArray:width:#40#192
+"
+
+	<madeBySmallAmp>
+	| a2 anUndefinedObject |
+	self
+		arrayClass;
+		should: [ 
+			a2 := anUndefinedObject fromArray: #( 0 0 0 0 0 0 ) width: 0 ]
+		raise: ZeroDivide
+]
+
 { #category : #'tests-accessing' }
 CTArray2DTest >> testHeight [
 
