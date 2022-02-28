@@ -94,6 +94,33 @@ CTArray2DTest >> testAtPut [
 	self assert: (foo atX: 1 atY: 5) equals: 12
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAtPut_amp [
+
+	<smallAmpCoveres: 'RemoveCaretOperator#CTArray2D#at:put:#85#145'>
+	<smallAmpFrom: 'CTArray2DTest>>#testAtPut'>
+	<madeBySmallAmp>
+	| foo aClass anInteger |
+	aClass := self arrayClass.
+	self assert: aClass asString equals: 'CTArray2D'.
+	foo := aClass width: 5 height: 20.
+	self
+		assert: aClass asString equals: 'CTArray2D';
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 20;
+		assert: foo size equals: 100;
+		assert: foo height equals: 20.
+	anInteger := foo at: 1 @ 5 put: 12.
+	self
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 20;
+		assert: foo size equals: 100;
+		assert: foo height equals: 20;
+		assert: anInteger equals: 12
+]
+
 { #category : #'tests-accessing rows/columns' }
 CTArray2DTest >> testAtRow [
 	| foo |
