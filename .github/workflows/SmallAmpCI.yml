@@ -1,9 +1,5 @@
 name: SmallAmpCI
 env:
-  SA_mode: dspotFastRank
-  SA_maxInputs: 10
-  SA_shreds: 15  
-  SA_timeBudget: 12
   SA_project_baseline: 'ContainersArray2D'
   SA_project_directory: 'src'
   
@@ -24,11 +20,7 @@ jobs:
     uses: TestAmplification/SmallAmpCI/.github/workflows/SmallAmpCI.yml@main
     with:
       testClasses: ${{github.event.inputs.testClasses }}
-      mode: ${{env.SA_mode}}
       parallel_jobs: ${{github.event.inputs.parallel_jobs}}
-      maxInputs: ${{env.SA_maxInputs}}
-      shreds: ${{env.SA_shreds}}
-      timeBudget: ${{env.SA_timeBudget}}
       input_project_baseline: ${{env.SA_project_baseline}}
       input_project_directory: ${{env.SA_project_directory}}
     secrets:
