@@ -211,6 +211,53 @@ CTArray2DTest >> testCopy [
 	self deny: cop identicalTo: foo
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testCopy_amp_A33 [
+
+	<smallAmpCoveres:
+	'RemoveCaretOperator#CTArray2D#atColumn:atRow:put:#80#126'>
+	<smallAmpFrom: 'CTArray2DTest>>#testCopy'>
+	<madeBySmallAmp>
+	| foo cop aClass anInteger |
+	aClass := self arrayClass.
+	self assert: aClass asString equals: 'CTArray2D'.
+	foo := aClass width: 5 height: 3.
+	self
+		assert: aClass asString equals: 'CTArray2D';
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 3;
+		assert: foo size equals: 15;
+		assert: foo height equals: 3.
+	foo atAllPut: 0.
+	self
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 3;
+		assert: foo size equals: 15;
+		assert: foo height equals: 3.
+	cop := foo copy.
+	self
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 3;
+		assert: foo size equals: 15;
+		assert: foo height equals: 3;
+		assert: cop class equals: CTArray2D;
+		assert: cop width equals: 5;
+		assert: cop extent equals: 5 @ 3;
+		assert: cop size equals: 15;
+		assert: cop height equals: 3.
+	anInteger := foo atColumn: 5 atRow: 1 put: 5.
+	self
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 3;
+		assert: foo size equals: 15;
+		assert: foo height equals: 3;
+		assert: anInteger equals: 5
+]
+
 { #category : #'tests-enumeration' }
 CTArray2DTest >> testDo [
 	| foo nb |
