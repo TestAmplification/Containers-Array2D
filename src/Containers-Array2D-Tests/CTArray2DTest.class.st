@@ -192,6 +192,27 @@ CTArray2DTest >> testAtXAtYPut [
 	self assert: (foo atX: 1 atY: 1) equals: 12
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAt_amp_L32 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAt` by applying some transformations and regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D>> #indexX:y:` from 216 to 240:
+		Operation: ReplaceOrReceiverWithFalseOperator
+		Code snippet: `(x < 1 or: [ x > width ])`
+		Dynamic state: {#x->0. #width->2}
+		Mutant id: ReplaceOrReceiverWithFalseOperator#CTArray2D#indexX:y:#216#240
+"
+
+	<madeBySmallAmp>
+	| anUndefinedObject |
+	(self arrayClass width2Height3 at: 1 @ 1) = 1.
+	anUndefinedObject := self arrayClass width2Height3.
+	self
+		should: [ anUndefinedObject at: 0 @ 2 ]
+		raise: SubscriptOutOfBounds
+]
+
 { #category : #'tests-converting' }
 CTArray2DTest >> testCannotAccessWithWrongCoordinates [
 	self should: [ self arrayClass width2Height3 atColumn: 6 atRow: 1 ] raise: SubscriptOutOfBounds
