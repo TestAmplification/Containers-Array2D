@@ -157,6 +157,24 @@ CTArray2DTest >> testAtRowPut_amp [
 	self assert: aCollection class equals: Array
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAtRow_amp_L3 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtRow` by applying some transformations and regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D>> #atRow:put:` from 52 to 120:
+		Operation: ReplaceIfFalseReceiverWithTrueOperator
+		Code snippet: `aCollection size = self width ifFalse: [ self error: 'wrong row size' ]`
+		Dynamic state: {#aCollection->#(1 2 3 4 5)}
+		Mutant id: ReplaceIfFalseReceiverWithTrueOperator#CTArray2D#atRow:put:#52#120
+"
+
+	<madeBySmallAmp>
+	| foo |
+	foo := self arrayClass width: 10 height: 3.
+	self should: [ foo atRow: 2 put: #( 1 2 3 4 5 ) ] raise: Error
+]
+
 { #category : #'tests-accessing x/y' }
 CTArray2DTest >> testAtXAtY [
 	
