@@ -1,8 +1,4 @@
 name: SmallAmpCI
-
-permissions:
-  contents: write
-  pull-requests: write
   
 on:
   workflow_dispatch:
@@ -25,4 +21,4 @@ jobs:
       input_project_baseline: 'ContainersArray2D'
       input_project_directory: 'src'
     secrets:
-      secret_github_token: ${{secrets.GITHUB_TOKEN}}
+      secret_github_token: ${{secrets.ACTIONS_SECRET}}
