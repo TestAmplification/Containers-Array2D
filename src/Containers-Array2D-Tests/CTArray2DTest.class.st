@@ -212,6 +212,33 @@ CTArray2DTest >> testAtXAtYPut [
 	self assert: (foo atX: 1 atY: 1) equals: 12
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAtXAtYPut_amp [
+
+	<smallAmpCoveres: 'RemoveCaretOperator#CTArray2D#atX:atY:put:#73#119'>
+	<smallAmpFrom: 'CTArray2DTest>>#testAtXAtYPut'>
+	<madeBySmallAmp>
+	| foo aClass anInteger |
+	aClass := self arrayClass.
+	self assert: aClass asString equals: 'CTArray2D'.
+	foo := aClass width: 5 height: 20.
+	self
+		assert: aClass asString equals: 'CTArray2D';
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 20;
+		assert: foo size equals: 100;
+		assert: foo height equals: 20.
+	anInteger := foo atX: 1 atY: 1 put: 12.
+	self
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 20;
+		assert: foo size equals: 100;
+		assert: foo height equals: 20;
+		assert: anInteger equals: 12
+]
+
 { #category : #'tests-converting' }
 CTArray2DTest >> testCannotAccessWithWrongCoordinates [
 	self should: [ self arrayClass width2Height3 atColumn: 6 atRow: 1 ] raise: SubscriptOutOfBounds
