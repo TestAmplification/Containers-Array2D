@@ -275,6 +275,26 @@ CTArray2DTest >> testSetWidth [
 	self assert: foo width equals: 3
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testSetWidth_amp_A11_L32_L23 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testSetWidth` by applying some transformations and regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D>> #atRow:` from 59 to 132:
+		Operation: ReplaceIfTrueReceiverWithFalseOperator
+		Code snippet: `(y < 1 or: [ y > self height ]) ifTrue: [ 
+	self errorSubscriptBounds: y ]`
+		Dynamic state: {#y->2}
+		Mutant id: ReplaceIfTrueReceiverWithFalseOperator#CTArray2D#atRow:#59#132
+"
+
+	<madeBySmallAmp>
+	| foo |
+	foo := self arrayClass width: 2 height: 3.
+	foo setWidth: 0.
+	self should: [ foo atRow: 0 ] raise: SubscriptOutOfBounds
+]
+
 { #category : #'tests-accessing' }
 CTArray2DTest >> testSize [
 	| foo |
