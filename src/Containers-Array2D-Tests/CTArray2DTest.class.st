@@ -110,6 +110,26 @@ CTArray2DTest >> testAtColumnPut [
 ]
 
 { #category : #'as yet unclassified' }
+CTArray2DTest >> testAtColumn_amp [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtColumn` by regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D>> #atColumn:put:` from 212 to 224:
+		Operation: RemoveCaretOperator
+		Code snippet: `^ aCollection`
+		Dynamic state: {#aCollection->#(1 2 3 4 5)}
+		Mutant id: RemoveCaretOperator#CTArray2D#atColumn:put:#212#224
+"
+
+	<madeBySmallAmp>
+	| foo aCollection |
+	aCollection := (self arrayClass width: 3 height: 5)
+		               atColumn: 2
+		               put: #( 1 2 3 4 5 ).
+	self assert: aCollection class equals: Array
+]
+
+{ #category : #'as yet unclassified' }
 CTArray2DTest >> testAtColumn_amp_L72 [
 
 	"SmallAmp has derived this test from `CTArray2DTest>>#testAtColumn` by applying some transformations and regenerating its assertions.
