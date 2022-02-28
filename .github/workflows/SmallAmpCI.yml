@@ -42,13 +42,13 @@ jobs:
   TestAmplification:
     uses: TestAmplification/SmallAmpCI/.github/workflows/SmallAmpCI.yml@main
     with:
-      testClasses: ${{inputs.testClasses }}
-      mode: ${{inputs.mode}}
-      parallel_jobs: ${{inputs.parallel_jobs}}
-      maxInputs: ${{inputs.maxInputs}}
-      shreds: ${{inputs.shreds}}
-      timeBudget: ${{inputs.timeBudget}}
-      input_project_baseline: ${{inputs.input_project_baseline}}
-      input_project_directory: ${{inputs.input_project_directory}}
+      testClasses: ${{github.event.inputs.testClasses }}
+      mode: ${{github.event.inputs.mode}}
+      parallel_jobs: ${{github.event.inputs.parallel_jobs}}
+      maxInputs: ${{github.event.inputs.maxInputs}}
+      shreds: ${{github.event.inputs.shreds}}
+      timeBudget: ${{github.event.inputs.timeBudget}}
+      input_project_baseline: ${{github.event.inputs.input_project_baseline}}
+      input_project_directory: ${{github.event.inputs.input_project_directory}}
     secrets:
       secret_github_token: ${{secrets.GITHUB_TOKEN}}
