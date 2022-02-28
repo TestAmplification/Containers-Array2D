@@ -1,0 +1,54 @@
+name: SmallAmpCI
+
+on:
+  workflow_dispatch:
+    inputs:
+      testClasses:
+        description: 'TestClasses to amplify (comma separated) empty-> all'
+        required: false
+        default: ''
+      mode:
+        description: 'mode (dspot, dspotFast, dspotFastRank)'
+        required: true
+        default: 'dspotFastRank'
+      parallel_jobs:         
+        description: 'Max number of all parallel jobs (0 use Input testClasses length)'
+        required: true
+        default: '12'
+      maxInputs:
+        description: 'Number of test variant per original test'
+        required: true
+        default: '10'
+      shreds:
+        description: 'Maximum number of methods per test class (0 means no shreding)'
+        required: true
+        default: '15'
+      timeBudget:
+        description: 'Number of minutes as time budget per test class (0 means no limit)'
+        required: true
+        default: '12'
+      input_project_baseline: 
+        description: 'The baseline of the project. extract it from .smalltalk.ston'
+        required: true
+        type: string        
+        default: 'ContainersArray2D'
+      input_project_directory:
+        description: 'The source directory of the project. extract it from .smalltalk.ston'
+        required: true
+        type: string        
+        default: 'src'
+
+jobs:
+  TestAmplification:
+    uses: TestAmplification/SmallAmpCI/blob/main/.github/workflows/SmallAmpCI.yml@main
+    with:
+      testClasses: ${{inputs.testClasses }}
+      mode: ${{inputs.mode}}
+      parallel_jobs: ${{inputs.parallel_jobs}}
+      maxInputs: ${{inputs.maxInputs}}
+      shreds: ${{inputs.shreds}}
+      timeBudget: ${{inputs.timeBudget}}
+      input_project_baseline: ${{inputs.input_project_baseline}}
+      input_project_directory: ${{inputs.input_project_directory}}
+    secrets:
+      secret_github_token: ${{secrets.GITHUB_TOKEN}}
