@@ -261,6 +261,28 @@ CTArray2DTest >> testExtentFromArray [
 	self assert: (foo atColumn: 3 atRow: 2) equals: 6
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testExtentFromArray_amp_U0 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testExtentFromArray` by applying some transformations and regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D>> #extent:fromArray:` from 111 to 199:
+		Operation: ReplaceIfFalseReceiverWithTrueOperator
+		Code snippet: `extent x * extent y = anArray size ifFalse: [ 
+	^ self error: 'dimensions don''t match' ]`
+		Dynamic state: {#anArray->#(1 2 3 4 5 6)}
+		Mutant id: ReplaceIfFalseReceiverWithTrueOperator#CTArray2D#extent:fromArray:#111#199
+"
+
+	<madeBySmallAmp>
+	| foo |
+	foo := self arrayClass width: 0 height: 0.
+	foo atAllPut: 0.
+	self
+		should: [ foo extent: 0 @ 0 fromArray: #( 0 0 0 0 0 0 ) ]
+		raise: Error
+]
+
 { #category : #'tests-private' }
 CTArray2DTest >> testFromArray [
 	
