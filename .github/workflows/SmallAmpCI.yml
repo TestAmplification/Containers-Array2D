@@ -1,7 +1,4 @@
 name: SmallAmpCI
-env:
-  SA_project_baseline: 'ContainersArray2D'
-  SA_project_directory: 'src'
   
 on:
   workflow_dispatch:
@@ -21,7 +18,7 @@ jobs:
     with:
       testClasses: ${{github.event.inputs.testClasses }}
       parallel_jobs: ${{github.event.inputs.parallel_jobs}}
-      input_project_baseline: ${{env.SA_project_baseline}}
-      input_project_directory: ${{env.SA_project_directory}}
+      input_project_baseline: 'ContainersArray2D'
+      input_project_directory: 'src'
     secrets:
       secret_github_token: ${{secrets.GITHUB_TOKEN}}
