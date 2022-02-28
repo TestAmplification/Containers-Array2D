@@ -85,6 +85,25 @@ CTArray2DTest >> testAtColumnPut [
 	1 to: foo height do: [ :y | self assert: (foo atColumn: 2 atRow: y) equals: 1 ]
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAtColumn_amp_L72 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtColumn` by applying some transformations and regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D>> #atColumn:put:` from 58 to 130:
+		Operation: ReplaceIfFalseReceiverWithTrueOperator
+		Code snippet: `aCollection size = self height ifFalse: [ 
+	self error: 'wrong column size' ]`
+		Dynamic state: {#aCollection->#(1 2 3 4 5)}
+		Mutant id: ReplaceIfFalseReceiverWithTrueOperator#CTArray2D#atColumn:put:#58#130
+"
+
+	<madeBySmallAmp>
+	| foo |
+	foo := self arrayClass width: 3 height: 5.
+	self should: [ foo atColumn: 2 put: #(  ) ] raise: Error
+]
+
 { #category : #'tests-accessing' }
 CTArray2DTest >> testAtPut [
 	
