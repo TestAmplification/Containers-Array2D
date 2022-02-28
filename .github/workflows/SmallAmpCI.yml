@@ -1,4 +1,7 @@
 name: SmallAmpCI
+
+permissions:
+  pull-requests: write
   
 on:
   workflow_dispatch:
@@ -10,7 +13,7 @@ on:
       parallel_jobs:         
         description: 'Max number of all parallel jobs (0 use Input testClasses length)'
         required: true
-        default: '1'
+        default: '2'
 
 jobs:
   TestAmplification:
