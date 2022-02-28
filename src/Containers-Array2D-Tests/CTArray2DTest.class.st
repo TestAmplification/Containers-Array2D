@@ -69,6 +69,27 @@ CTArray2DTest >> testAtColumnAtRowPut [
 	self assert: (foo atColumn: 1 atRow: 1) equals: 12
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAtColumnAtRow_amp_L19_L27 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtColumnAtRow` by applying some transformations and regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D>> #indexX:y:` from 216 to 240:
+		Operation: ReplaceOrReceiverWithFalseOperator
+		Code snippet: `(x < 1 or: [ x > width ])`
+		Dynamic state: {#x->0. #width->2}
+		Mutant id: ReplaceOrReceiverWithFalseOperator#CTArray2D#indexX:y:#216#240
+"
+
+	<madeBySmallAmp>
+	| anUndefinedObject |
+	(self arrayClass width2Height3 atColumn: 1 atRow: 1) = 0.
+	anUndefinedObject := self arrayClass width2Height3.
+	self
+		should: [ anUndefinedObject atColumn: 0 atRow: 2 ]
+		raise: SubscriptOutOfBounds
+]
+
 { #category : #'tests-accessing rows/columns' }
 CTArray2DTest >> testAtColumnNotInBounds [
 	| foo |
