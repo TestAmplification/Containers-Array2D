@@ -18,7 +18,9 @@ jobs:
     with:
       testClasses: ${{github.event.inputs.testClasses }}
       parallel_jobs: ${{github.event.inputs.parallel_jobs}}
+      # --------- To be configoured for each project ---------------------
       input_project_baseline: 'ContainersArray2D'
       input_project_directory: 'src'
+      # --------- End of to be configoured for each project --------------
     secrets:
-      secret_github_token: ${{secrets.ACTIONS_SECRET}}
+      secret_github_token: ${{secrets.GITHUB_TOKEN}}
