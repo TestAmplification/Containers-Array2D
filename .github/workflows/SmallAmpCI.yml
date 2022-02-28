@@ -1,5 +1,12 @@
 name: SmallAmpCI
-
+env:
+  mode: dspotFastRank
+  maxInputs: 10
+  shreds: 15  
+  timeBudget: 12
+  project_baseline: 'ContainersArray2D'
+  project_directory: 'src'
+  
 on:
   workflow_dispatch:
     inputs:
@@ -7,48 +14,22 @@ on:
         description: 'TestClasses to amplify (comma separated) empty-> all'
         required: false
         default: ''
-      mode:
-        description: 'mode (dspot, dspotFast, dspotFastRank)'
-        required: true
-        default: 'dspotFastRank'
       parallel_jobs:         
         description: 'Max number of all parallel jobs (0 use Input testClasses length)'
         required: true
-        default: '12'
-      maxInputs:
-        description: 'Number of test variant per original test'
-        required: true
-        default: '10'
-      shreds:
-        description: 'Maximum number of methods per test class (0 means no shreding)'
-        required: true
-        default: '15'
-      timeBudget:
-        description: 'Number of minutes as time budget per test class (0 means no limit)'
-        required: true
-        default: '12'
-      input_project_baseline: 
-        description: 'The baseline of the project. extract it from .smalltalk.ston'
-        required: true
-        type: string        
-        default: 'ContainersArray2D'
-      input_project_directory:
-        description: 'The source directory of the project. extract it from .smalltalk.ston'
-        required: true
-        type: string        
-        default: 'src'
+        default: '8'
 
 jobs:
   TestAmplification:
     uses: TestAmplification/SmallAmpCI/.github/workflows/SmallAmpCI.yml@main
     with:
       testClasses: ${{github.event.inputs.testClasses }}
-      mode: ${{github.event.inputs.mode}}
+      mode: ${{env.mode}}
       parallel_jobs: ${{github.event.inputs.parallel_jobs}}
-      maxInputs: ${{github.event.inputs.maxInputs}}
-      shreds: ${{github.event.inputs.shreds}}
-      timeBudget: ${{github.event.inputs.timeBudget}}
-      input_project_baseline: ${{github.event.inputs.input_project_baseline}}
-      input_project_directory: ${{github.event.inputs.input_project_directory}}
+      maxInputs: ${{env.maxInputs}}
+      shreds: ${{env.shreds}}
+      timeBudget: ${{env.timeBudget}}
+      input_project_baseline: ${{env.project_baseline}}
+      input_project_directory: ${{env.project_directory}}
     secrets:
       secret_github_token: ${{secrets.GITHUB_TOKEN}}
