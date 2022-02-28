@@ -46,6 +46,30 @@ CTArray2DTest >> testAtAllPut [
 	foo do: [ :each | self assert: each equals: 12 ]
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAtAllPut_amp_A25 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtAllPut` by applying some transformations and regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D>> #inpectionGrid` from 71 to 131:
+		Operation: RemoveCaretOperator
+		Code snippet: `^ SpTextPresenter new
+	  text: self printString;
+	  yourself`
+		Dynamic state: nil
+		Mutant id: RemoveCaretOperator#CTArray2D#inpectionGrid#71#131
+"
+
+	<madeBySmallAmp>
+	| foo aSpTextPresenter |
+	foo := self arrayClass width: 5 height: 20.
+	aSpTextPresenter := foo
+		                    atAllPut: 12;
+		                    do: [ :each |  ];
+		                    inpectionGrid.
+	self assert: aSpTextPresenter class equals: SpTextPresenter
+]
+
 { #category : #'tests-accessing rows/columns' }
 CTArray2DTest >> testAtColumn [
 	| foo |
@@ -85,6 +109,45 @@ CTArray2DTest >> testAtColumnPut [
 	1 to: foo height do: [ :y | self assert: (foo atColumn: 2 atRow: y) equals: 1 ]
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAtColumn_amp [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtColumn` by regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D>> #atColumn:put:` from 212 to 224:
+		Operation: RemoveCaretOperator
+		Code snippet: `^ aCollection`
+		Dynamic state: {#aCollection->#(1 2 3 4 5)}
+		Mutant id: RemoveCaretOperator#CTArray2D#atColumn:put:#212#224
+"
+
+	<madeBySmallAmp>
+	| foo aCollection |
+	aCollection := (self arrayClass width: 3 height: 5)
+		               atColumn: 2
+		               put: #( 1 2 3 4 5 ).
+	self assert: aCollection class equals: Array
+]
+
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAtColumn_amp_L72 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtColumn` by applying some transformations and regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D>> #atColumn:put:` from 58 to 130:
+		Operation: ReplaceIfFalseReceiverWithTrueOperator
+		Code snippet: `aCollection size = self height ifFalse: [ 
+	self error: 'wrong column size' ]`
+		Dynamic state: {#aCollection->#(1 2 3 4 5)}
+		Mutant id: ReplaceIfFalseReceiverWithTrueOperator#CTArray2D#atColumn:put:#58#130
+"
+
+	<madeBySmallAmp>
+	| foo |
+	foo := self arrayClass width: 3 height: 5.
+	self should: [ foo atColumn: 2 put: #(  ) ] raise: Error
+]
+
 { #category : #'tests-accessing' }
 CTArray2DTest >> testAtPut [
 	
@@ -108,6 +171,64 @@ CTArray2DTest >> testAtRowPut [
 	foo := self arrayClass width: 5 height: 3.
 	foo atRow: 2 put: #(1 1 1 1 1).
 	1 to: foo width do: [ :x | self assert: (foo atColumn: x atRow: 2) equals: 1 ]
+]
+
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAtRowPut_amp [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtRowPut` by regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D>> #atRow:put:` from 202 to 214:
+		Operation: RemoveCaretOperator
+		Code snippet: `^ aCollection`
+		Dynamic state: {#aCollection->#(1 1 1 1 1)}
+		Mutant id: RemoveCaretOperator#CTArray2D#atRow:put:#202#214
+"
+
+	<madeBySmallAmp>
+	| foo aCollection |
+	aCollection := (self arrayClass width: 5 height: 3)
+		               atRow: 2
+		               put: #( 1 1 1 1 1 ).
+	self assert: aCollection class equals: Array
+]
+
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAtRowPut_amp_A15 [
+
+	<smallAmpCoveres:
+	'RemoveCaretOperator#CTArray2D#atColumn:atRow:put:#80#126'>
+	<smallAmpFrom: 'CTArray2DTest>>#testAtRowPut'>
+	<madeBySmallAmp>
+	| foo aClass aCollection anInteger |
+	aClass := self arrayClass.
+	self assert: aClass asString equals: 'CTArray2D'.
+	foo := aClass width: 5 height: 3.
+	self
+		assert: aClass asString equals: 'CTArray2D';
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 3;
+		assert: foo size equals: 15;
+		assert: foo height equals: 3.
+	aCollection := foo atRow: 2 put: #( 1 1 1 1 1 ).
+	self
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 3;
+		assert: foo size equals: 15;
+		assert: foo height equals: 3;
+		assert: aCollection class equals: Array;
+		assert: aCollection size equals: 5;
+		assert: aCollection equals: #( 1 1 1 1 1 ).
+	anInteger := foo atColumn: 4 atRow: 3 put: 5.
+	self
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 3;
+		assert: foo size equals: 15;
+		assert: foo height equals: 3;
+		assert: anInteger equals: 5
 ]
 
 { #category : #'tests-accessing x/y' }
@@ -209,6 +330,29 @@ CTArray2DTest >> testFromArray [
 	
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testFromArray_amp_U0 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testFromArray` by applying some transformations and regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D class>> #fromArray:width:` from 40 to 192:
+		Operation: ReplaceIfFalseReceiverWithTrueOperator
+		Code snippet: `(aCollection size \\ aSize) isZero ifFalse: [ 
+	^ self error:
+		  'There is a mismatch between the collection size and the supposed sized to the 2D array' ]`
+		Dynamic state: {#aCollection->#(0 2 4 6 8 10). #aSize->3}
+		Mutant id: ReplaceIfFalseReceiverWithTrueOperator#CTArray2D class#fromArray:width:#40#192
+"
+
+	<madeBySmallAmp>
+	| a2 anUndefinedObject |
+	self
+		arrayClass;
+		should: [ 
+			a2 := anUndefinedObject fromArray: #( 0 0 0 0 0 0 ) width: 0 ]
+		raise: ZeroDivide
+]
+
 { #category : #'tests-accessing' }
 CTArray2DTest >> testHeight [
 
@@ -273,6 +417,26 @@ CTArray2DTest >> testSetWidth [
 	foo := self arrayClass width: 2 height: 3.
 	foo setWidth: 3.
 	self assert: foo width equals: 3
+]
+
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testSetWidth_amp_A11_L32_L23 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testSetWidth` by applying some transformations and regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D>> #atRow:` from 59 to 132:
+		Operation: ReplaceIfTrueReceiverWithFalseOperator
+		Code snippet: `(y < 1 or: [ y > self height ]) ifTrue: [ 
+	self errorSubscriptBounds: y ]`
+		Dynamic state: {#y->2}
+		Mutant id: ReplaceIfTrueReceiverWithFalseOperator#CTArray2D#atRow:#59#132
+"
+
+	<madeBySmallAmp>
+	| foo |
+	foo := self arrayClass width: 2 height: 3.
+	foo setWidth: 0.
+	self should: [ foo atRow: 0 ] raise: SubscriptOutOfBounds
 ]
 
 { #category : #'tests-accessing' }
