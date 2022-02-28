@@ -46,6 +46,30 @@ CTArray2DTest >> testAtAllPut [
 	foo do: [ :each | self assert: each equals: 12 ]
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAtAllPut_amp_A25 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtAllPut` by applying some transformations and regenerating its assertions.
+	This test can cover this part:
+	*	In `CTArray2D>> #inpectionGrid` from 71 to 131:
+		Operation: RemoveCaretOperator
+		Code snippet: `^ SpTextPresenter new
+	  text: self printString;
+	  yourself`
+		Dynamic state: nil
+		Mutant id: RemoveCaretOperator#CTArray2D#inpectionGrid#71#131
+"
+
+	<madeBySmallAmp>
+	| foo aSpTextPresenter |
+	foo := self arrayClass width: 5 height: 20.
+	aSpTextPresenter := foo
+		                    atAllPut: 12;
+		                    do: [ :each |  ];
+		                    inpectionGrid.
+	self assert: aSpTextPresenter class equals: SpTextPresenter
+]
+
 { #category : #'tests-accessing rows/columns' }
 CTArray2DTest >> testAtColumn [
 	| foo |
