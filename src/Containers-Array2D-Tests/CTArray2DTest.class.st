@@ -175,6 +175,49 @@ CTArray2DTest >> testDo2 [
 	self assert: count equals: 3
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testDo_amp [
+
+	<smallAmpCoveres:
+	'RemoveCaretOperator#CTArray2D#atColumn:atRow:put:#80#126'>
+	<smallAmpFrom: 'CTArray2DTest>>#testDo'>
+	<madeBySmallAmp>
+	| foo nb aClass anInteger |
+	aClass := self arrayClass.
+	self assert: aClass asString equals: 'CTArray2D'.
+	foo := aClass width: 5 height: 3.
+	self
+		assert: aClass asString equals: 'CTArray2D';
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 3;
+		assert: foo size equals: 15;
+		assert: foo height equals: 3.
+	foo atAllPut: 0.
+	self
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 3;
+		assert: foo size equals: 15;
+		assert: foo height equals: 3.
+	anInteger := foo atColumn: 2 atRow: 2 put: 1.
+	self
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 3;
+		assert: foo size equals: 15;
+		assert: foo height equals: 3;
+		assert: anInteger equals: 1.
+	nb := 0.
+	foo do: [ :each | each = 0 ifFalse: [ nb := each ] ].
+	self
+		assert: foo class equals: CTArray2D;
+		assert: foo width equals: 5;
+		assert: foo extent equals: 5 @ 3;
+		assert: foo size equals: 15;
+		assert: foo height equals: 3
+]
+
 { #category : #'tests-accessing' }
 CTArray2DTest >> testExtent [
 	
