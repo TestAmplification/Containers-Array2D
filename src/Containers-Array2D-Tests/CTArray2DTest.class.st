@@ -73,6 +73,30 @@ CTArray2DTest >> testAmplified_3 [
 	self should: [ foo atRow: 2 put: #( 1 2 3 4 5 ) ] raise: Error
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAmplified_5 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtColumnAtRowPut` by applying some transformations and regenerating its assertions.
+	This test can cover these parts:
+	* It detects the injection of an artificial fault (Increase a literal integer) in `CTArray2D>> #rowsAndColumnsDo:`:
+		original code snippet: `1`
+		Mutated code snippet: `2`
+		Dynamic state: nil
+	* It detects the injection of an artificial fault (Increase a literal integer) in `CTArray2D>> #rowsAndColumnsDo:`:
+		original code snippet: `1`
+		Mutated code snippet: `2`
+		Dynamic state: nil
+"
+
+	<madeBySmallAmp>
+	| foo |
+	foo := self arrayClass width: 1 height: 1.
+	foo atColumn: 1 atRow: 1 put: 1.
+	self
+		should: [ foo rowsAndColumnsDo: [  ] ]
+		raise: ArgumentsCountMismatch
+]
+
 { #category : #'tests-converting' }
 CTArray2DTest >> testAsArray [
 	| foo |
