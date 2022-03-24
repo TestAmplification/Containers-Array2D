@@ -36,6 +36,25 @@ CTAlternateArray2DTest >> testAllPositionsWithinFrom [
 	self assert: foo equals: ordColl
 ]
 
+{ #category : #'as yet unclassified' }
+CTAlternateArray2DTest >> testAmplified_1 [
+
+	"SmallAmp has derived this test from `CTAlternateArray2DTest>>#testAllPositionsWithinFrom` by applying some transformations and regenerating its assertions.
+	This test can cover this part:
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `CTAlternateArray2D>> #allPositionsWithin:from:`:
+		original code snippet: `someOrigin + someDistance`
+		Mutated code snippet: `someOrigin yourself`
+		Dynamic state: nil
+"
+
+	<madeBySmallAmp>
+	| foo ordColl |
+	foo := self arrayClass width2Height3
+		       allPositionsWithin: 1 @ 0
+		       from: 1 @ 2.
+	self assert: foo size equals: 2
+]
+
 { #category : #'tests-accessing' }
 CTAlternateArray2DTest >> testAt [
 
