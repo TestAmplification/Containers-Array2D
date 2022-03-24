@@ -45,6 +45,41 @@ CTArray2DTest >> testAmplified_1 [
 ]
 
 { #category : #'as yet unclassified' }
+CTArray2DTest >> testAmplified_2 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testExtentFromArray` by applying some transformations and regenerating its assertions.
+	This test can cover these parts:
+	* It detects the injection of an artificial fault (Replace #ifFalse: receiver with true) in `CTArray2D>> #extent:fromArray:`:
+		original code snippet: `extent x * extent y = anArray size ifFalse: [ 
+	^ self error: 'dimensions don''t match' ]`
+		Mutated code snippet: `true ifFalse: [ ^ self error: 'dimensions don''t match' ]`
+		Dynamic state: {#anArray->#(1 2 3 4 5 6)}
+	* It detects the injection of an artificial fault (Nullify the arguments of message sends) in `CTArray2D>> #extent:fromArray:`:
+		original code snippet: `extent x * extent y = anArray size ifFalse: [ 
+	^ self error: 'dimensions don''t match' ]`
+		Mutated code snippet: `extent x * extent y = anArray size ifFalse: nil`
+		Dynamic state: {#anArray->#(1 2 3 4 5 6)}
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `CTArray2D>> #extent:fromArray:`:
+		original code snippet: `extent x * extent y = anArray size ifFalse: [ 
+	^ self error: 'dimensions don''t match' ]`
+		Mutated code snippet: `(extent x * extent y = anArray size) yourself`
+		Dynamic state: {#anArray->#(1 2 3 4 5 6)}
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `CTArray2D>> #extent:fromArray:`:
+		original code snippet: `self error: 'dimensions don''t match'`
+		Mutated code snippet: `self yourself`
+		Dynamic state: nil
+"
+
+	<madeBySmallAmp>
+	| foo |
+	foo := self arrayClass width: 2 height: 2.
+	foo atAllPut: 0.
+	self
+		should: [ foo extent: 1 @ 2 fromArray: #( 1 2 3 4 5 6 ) ]
+		raise: Error
+]
+
+{ #category : #'as yet unclassified' }
 CTArray2DTest >> testAmplified_3 [
 
 	"SmallAmp has derived this test from `CTArray2DTest>>#testAtRow` by applying some transformations and regenerating its assertions.
