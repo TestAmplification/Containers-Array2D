@@ -109,6 +109,40 @@ CTArray2DTest >> testAmplified_3 [
 ]
 
 { #category : #'as yet unclassified' }
+CTArray2DTest >> testAmplified_4 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtPut` by applying some transformations and regenerating its assertions.
+	This test can cover these parts:
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `CTArray2D>> #rowsAndColumnsDo:`:
+		original code snippet: `1 to: self height do: [ :row | aBlock value: row value: col ]`
+		Mutated code snippet: `1 yourself`
+		Dynamic state: nil
+	* It detects the injection of an artificial fault (Removing all lines in a method) in `CTArray2D>> #rowsAndColumnsDo:`:
+		original code snippet: `1 to: self width do: [ :col | 
+	1 to: self height do: [ :row | aBlock value: row value: col ] ]`
+		Mutated code snippet: ``
+		Dynamic state: nil
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `CTArray2D>> #rowsAndColumnsDo:`:
+		original code snippet: `aBlock value: row value: col`
+		Mutated code snippet: `aBlock yourself`
+		Dynamic state: {#row->20. #col->5}
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `CTArray2D>> #rowsAndColumnsDo:`:
+		original code snippet: `1 to: self width do: [ :col | 
+	1 to: self height do: [ :row | aBlock value: row value: col ] ]`
+		Mutated code snippet: `1 yourself`
+		Dynamic state: nil
+"
+
+	<madeBySmallAmp>
+	| foo |
+	foo := self arrayClass width: 5 height: 20.
+	foo at: 1 @ 5 put: 12.
+	self
+		should: [ foo rowsAndColumnsDo: [  ] ]
+		raise: ArgumentsCountMismatch
+]
+
+{ #category : #'as yet unclassified' }
 CTArray2DTest >> testAmplified_5 [
 
 	"SmallAmp has derived this test from `CTArray2DTest>>#testAtColumnAtRowPut` by applying some transformations and regenerating its assertions.
