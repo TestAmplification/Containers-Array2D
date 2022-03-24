@@ -16,6 +16,142 @@ CTArray2DTest >> classUnderTest [
 	^ CTArray2D
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAmplified_1 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtColumn` by applying some transformations and regenerating its assertions.
+	This test can cover these parts:
+	* It detects the injection of an artificial fault (Nullify the arguments of message sends) in `CTArray2D>> #atColumn:put:`:
+		original code snippet: `aCollection size = self height ifFalse: [ 
+	self error: 'wrong column size' ]`
+		Mutated code snippet: `aCollection size = self height ifFalse: nil`
+		Dynamic state: {#aCollection->#(1 1 1 1 1)}
+	* It detects the injection of an artificial fault (Replace #ifFalse: receiver with true) in `CTArray2D>> #atColumn:put:`:
+		original code snippet: `aCollection size = self height ifFalse: [ 
+	self error: 'wrong column size' ]`
+		Mutated code snippet: `true ifFalse: [ self error: 'wrong column size' ]`
+		Dynamic state: {#aCollection->#(1 2 3 4 5)}
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `CTArray2D>> #atColumn:put:`:
+		original code snippet: `self error: 'wrong column size'`
+		Mutated code snippet: `self yourself`
+		Dynamic state: nil
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `CTArray2D>> #atColumn:put:`:
+		original code snippet: `aCollection size = self height ifFalse: [ 
+	self error: 'wrong column size' ]`
+		Mutated code snippet: `(aCollection size = self height) yourself`
+		Dynamic state: {#aCollection->#(1 1 1 1 1)}
+"
+
+	<madeBySmallAmp>
+	| foo |
+	foo := self arrayClass width: 3 height: 5.
+	self should: [ foo atColumn: 2 put: #(  ) ] raise: Error
+]
+
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAmplified_2 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtColumnPut` by regenerating its assertions.
+	This test can cover this part:
+	* It detects the injection of an artificial fault (Remove ^) in `CTArray2D>> #atColumn:put:`:
+		original code snippet: `^ aCollection`
+		Mutated code snippet: `aCollection`
+		Dynamic state: {#aCollection->#(1 1 1 1 1)}
+"
+
+	<madeBySmallAmp>
+	| foo aCollection |
+	aCollection := (self arrayClass width: 3 height: 5)
+		               atColumn: 2
+		               put: #( 1 1 1 1 1 ).
+	self assert: aCollection class equals: Array
+]
+
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAmplified_3 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtRowPut` by regenerating its assertions.
+	This test can cover this part:
+	* It detects the injection of an artificial fault (Remove ^) in `CTArray2D>> #atRow:put:`:
+		original code snippet: `^ aCollection`
+		Mutated code snippet: `aCollection`
+		Dynamic state: {#aCollection->#(1 1 1 1 1)}
+"
+
+	<madeBySmallAmp>
+	| foo aCollection |
+	aCollection := (self arrayClass width: 5 height: 3)
+		               atRow: 2
+		               put: #( 1 1 1 1 1 ).
+	self assert: aCollection class equals: Array
+]
+
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAmplified_4 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testRowAndColumnValuesDo` by applying some transformations and regenerating its assertions.
+	This test can cover these parts:
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `CTArray2D>> #rowAndColumnValuesDo:`:
+		original code snippet: `1 to: self width do: [ :col | 
+	1 to: self height do: [ :row | 
+		aBlock value: row value: col value: (self atColumn: col atRow: row) ] ]`
+		Mutated code snippet: `1 yourself`
+		Dynamic state: nil
+	* It detects the injection of an artificial fault (Removing all lines in a method) in `CTArray2D>> #rowAndColumnValuesDo:`:
+		original code snippet: `1 to: self width do: [ :col | 
+	1 to: self height do: [ :row | 
+		aBlock value: row value: col value: (self atColumn: col atRow: row) ] ]`
+		Mutated code snippet: ``
+		Dynamic state: nil
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `CTArray2D>> #rowAndColumnValuesDo:`:
+		original code snippet: `aBlock value: row value: col value: (self atColumn: col atRow: row)`
+		Mutated code snippet: `aBlock yourself`
+		Dynamic state: {#row->1. #col->1}
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `CTArray2D>> #rowAndColumnValuesDo:`:
+		original code snippet: `1 to: self height do: [ :row | 
+	aBlock value: row value: col value: (self atColumn: col atRow: row) ]`
+		Mutated code snippet: `1 yourself`
+		Dynamic state: nil
+"
+
+	<madeBySmallAmp>
+	| foo array |
+	array := #( 1 2 3 4 5 6 ).
+	foo := self classUnderTest width2Height3.
+	self
+		should: [ foo rowAndColumnValuesDo: nil ]
+		raise: MessageNotUnderstood
+]
+
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAmplified_5 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtRowPut` by applying some transformations and regenerating its assertions.
+	This test can cover these parts:
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `CTArray2D>> #atRow:put:`:
+		original code snippet: `self error: 'wrong row size'`
+		Mutated code snippet: `self yourself`
+		Dynamic state: nil
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `CTArray2D>> #atRow:put:`:
+		original code snippet: `aCollection size = self width ifFalse: [ self error: 'wrong row size' ]`
+		Mutated code snippet: `(aCollection size = self width) yourself`
+		Dynamic state: {#aCollection->#(1 1 1 1 1)}
+	* It detects the injection of an artificial fault (Nullify the arguments of message sends) in `CTArray2D>> #atRow:put:`:
+		original code snippet: `aCollection size = self width ifFalse: [ self error: 'wrong row size' ]`
+		Mutated code snippet: `aCollection size = self width ifFalse: nil`
+		Dynamic state: {#aCollection->#(1 1 1 1 1)}
+	* It detects the injection of an artificial fault (Replace #ifFalse: receiver with true) in `CTArray2D>> #atRow:put:`:
+		original code snippet: `aCollection size = self width ifFalse: [ self error: 'wrong row size' ]`
+		Mutated code snippet: `true ifFalse: [ self error: 'wrong row size' ]`
+		Dynamic state: {#aCollection->#(1 2 3 4 5)}
+"
+
+	<madeBySmallAmp>
+	| foo |
+	foo := self arrayClass width: 6 height: 3.
+	self should: [ foo atRow: 2 put: #( 1 1 1 1 1 ) ] raise: Error
+]
+
 { #category : #'tests-converting' }
 CTArray2DTest >> testAsArray [
 	| foo |
