@@ -49,6 +49,25 @@ CTArray2DTest >> testAmplified_1 [
 ]
 
 { #category : #'as yet unclassified' }
+CTArray2DTest >> testAmplified_2 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtColumnPut` by regenerating its assertions.
+	This test can cover this part:
+	* It detects the injection of an artificial fault (Remove ^) in `CTArray2D>> #atColumn:put:`:
+		original code snippet: `^ aCollection`
+		Mutated code snippet: `aCollection`
+		Dynamic state: {#aCollection->#(1 1 1 1 1)}
+"
+
+	<madeBySmallAmp>
+	| foo aCollection |
+	aCollection := (self arrayClass width: 3 height: 5)
+		               atColumn: 2
+		               put: #( 1 1 1 1 1 ).
+	self assert: aCollection class equals: Array
+]
+
+{ #category : #'as yet unclassified' }
 CTArray2DTest >> testAmplified_3 [
 
 	"SmallAmp has derived this test from `CTArray2DTest>>#testAtRowPut` by regenerating its assertions.
