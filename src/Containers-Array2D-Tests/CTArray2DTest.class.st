@@ -16,6 +16,34 @@ CTArray2DTest >> classUnderTest [
 	^ CTArray2D
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAmplified_1 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtColumnAtRow` by applying some transformations and regenerating its assertions.
+	This test can cover these parts:
+	* It detects the injection of an artificial fault (Decrease a literal integer) in `CTArray2D>> #indexX:y:`:
+		original code snippet: `1`
+		Mutated code snippet: `0`
+		Dynamic state: nil
+	* It detects the injection of an artificial fault (Replace #or: receiver with false) in `CTArray2D>> #indexX:y:`:
+		original code snippet: `(x < 1 or: [ x > width ])`
+		Mutated code snippet: `(false or: [ x > width ])`
+		Dynamic state: {#x->0. #width->2}
+	* It detects the injection of an artificial fault (Convert a literal integer to zero) in `CTArray2D>> #indexX:y:`:
+		original code snippet: `1`
+		Mutated code snippet: `0`
+		Dynamic state: nil
+"
+
+	<madeBySmallAmp>
+	| anUndefinedObject |
+	(self arrayClass width2Height3 atColumn: 1 atRow: 1) = 1.
+	anUndefinedObject := self arrayClass width2Height3.
+	self
+		should: [ anUndefinedObject atColumn: 0 atRow: 2 ]
+		raise: SubscriptOutOfBounds
+]
+
 { #category : #'tests-converting' }
 CTArray2DTest >> testAsArray [
 	| foo |
