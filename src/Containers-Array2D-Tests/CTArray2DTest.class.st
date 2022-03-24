@@ -166,6 +166,25 @@ CTArray2DTest >> testAmplified_5 [
 		raise: ArgumentsCountMismatch
 ]
 
+{ #category : #'as yet unclassified' }
+CTArray2DTest >> testAmplified_6 [
+
+	"SmallAmp has derived this test from `CTArray2DTest>>#testAtRow` by regenerating its assertions.
+	This test can cover this part:
+	* It detects the injection of an artificial fault (Remove ^) in `CTArray2D>> #atRow:put:`:
+		original code snippet: `^ aCollection`
+		Mutated code snippet: `aCollection`
+		Dynamic state: {#aCollection->#(1 2 3 4 5)}
+"
+
+	<madeBySmallAmp>
+	| foo aCollection |
+	aCollection := (self arrayClass width: 5 height: 3)
+		               atRow: 2
+		               put: #( 1 2 3 4 5 ).
+	self assert: aCollection class equals: Array
+]
+
 { #category : #'tests-converting' }
 CTArray2DTest >> testAsArray [
 	| foo |
